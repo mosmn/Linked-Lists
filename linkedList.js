@@ -96,19 +96,59 @@ class LinkedList {
         }
         return null;
     }
+
+    toString() {
+        let node = this.list;
+        let string = '';
+        while (node) {
+            string += `( ${node.value} ) ->`
+            node = node.nextNode;
+            if (!node) {
+                string += ' null';
+            }
+        }
+        return string;
+    }
+
+    insertAt(value, index) {
+        const newNode = new Node(value);
+        let node = this.list;
+        for (let i = 0; i < index - 1; i++) {
+            node = node.nextNode;
+        }
+        newNode.nextNode = node.nextNode;
+        node.nextNode = newNode;
+    }
+
+    removeAt(index) {
+        let node = this.list;
+        for (let i = 0; i < index - 1; i++) {
+            node = node.nextNode;
+        }
+        node.nextNode = node.nextNode.nextNode;
+    }
 }
   
 const linkedList = new LinkedList();
 
-linkedList.append(1);
-linkedList.append(9);
-linkedList.append(3);
-linkedList.append(4);
-linkedList.prepend(0);
+linkedList.append(10);
+linkedList.append(20);
+linkedList.append(30);
+linkedList.prepend(5);
 
-console.log(linkedList);
-console.log(linkedList.size());
-console.log(linkedList.tail());
-console.log(linkedList.contains(39));
-console.log(linkedList.find(1));
+console.log(linkedList.toString()); // Outputs: ( 5 ) -> ( 10 ) -> ( 20 ) -> ( 30 ) -> null
+console.log(linkedList.size()); // Outputs: 4
+console.log(linkedList.head()); // Outputs: Node { value: 5, nextNode: Node { value: 10, nextNode: [Node] } }
+console.log(linkedList.tail()); // Outputs: Node { value: 30, nextNode: null }
+console.log(linkedList.at(2)); // Outputs: Node { value: 20, nextNode: Node { value: 30, nextNode: null } }
+console.log(linkedList.contains(20)); // Outputs: true
+console.log(linkedList.find(10)); // Outputs: 1
 
+linkedList.pop();
+console.log(linkedList.toString()); // Outputs: ( 5 ) -> ( 10 ) -> ( 20 ) -> null
+
+linkedList.insertAt(15, 2);
+console.log(linkedList.toString()); // Outputs: ( 5 ) -> ( 10 ) -> ( 15 ) -> ( 20 ) -> null
+
+linkedList.removeAt(1);
+console.log(linkedList.toString()); // Outputs: ( 5 ) -> ( 15 ) -> ( 20 ) -> null
