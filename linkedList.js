@@ -24,13 +24,27 @@ class LinkedList {
         this.tail = newNode;
       }
     }
+
+    prepend(value) {
+        const newNode = new Node(value);
+  
+        if (!this.head) {
+          this.head = newNode;
+          this.tail = newNode;
+        } else {
+            newNode.nextNode = this.head;
+            this.head = newNode;
+        }
+    }
 }
   
 const linkedList = new LinkedList();
 
-linkedList.append(10);
-linkedList.append(20);
-linkedList.append(30);
+linkedList.append(1);
+linkedList.append(2);
+linkedList.append(3);
+linkedList.prepend(5);
+linkedList.prepend(4);
 
 console.log(linkedList);
 
