@@ -66,6 +66,14 @@ class LinkedList {
         }
         return node;
     }
+
+    pop() {
+        let node = this.list;
+        while (node.nextNode.nextNode) {
+            node = node.nextNode;
+        }
+        node.nextNode = null;
+    }
 }
   
 const linkedList = new LinkedList();
@@ -75,10 +83,11 @@ linkedList.append(9);
 linkedList.append(3);
 linkedList.append(4);
 linkedList.prepend(0);
+linkedList.pop();
+
+
 
 console.log(linkedList);
 console.log(linkedList.size());
-console.log(linkedList.head());
 console.log(linkedList.tail());
-console.log(linkedList.at(0));
 
