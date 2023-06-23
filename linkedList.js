@@ -74,6 +74,17 @@ class LinkedList {
         }
         node.nextNode = null;
     }
+
+    contains(value) {
+        let node = this.list;
+        while (node) {
+            if (node.value === value) {
+                return true;
+            }
+            node = node.nextNode;
+        }
+        return false;
+    }
 }
   
 const linkedList = new LinkedList();
@@ -83,11 +94,9 @@ linkedList.append(9);
 linkedList.append(3);
 linkedList.append(4);
 linkedList.prepend(0);
-linkedList.pop();
-
-
 
 console.log(linkedList);
 console.log(linkedList.size());
 console.log(linkedList.tail());
+console.log(linkedList.contains(39));
 
