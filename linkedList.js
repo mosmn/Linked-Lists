@@ -9,42 +9,76 @@ class Node {
   
 class LinkedList {
     constructor() {
-      this.head = null;
-      this.tail = null;
+      this.list = null;
     }
   
     append(value) {
       const newNode = new Node(value);
   
-      if (!this.head) {
-        this.head = newNode;
-        this.tail = newNode;
+      if (!this.list) {
+        this.list = newNode;
       } else {
-        this.tail.nextNode = newNode;
-        this.tail = newNode;
+        let node = this.list;
+        while (node.nextNode) {
+          node = node.nextNode;
+        }
+        node.nextNode = newNode;
       }
     }
 
     prepend(value) {
         const newNode = new Node(value);
   
-        if (!this.head) {
-          this.head = newNode;
-          this.tail = newNode;
+        if (!this.list) {
+            this.list = newNode;
         } else {
-            newNode.nextNode = this.head;
-            this.head = newNode;
+            newNode.nextNode = this.list;
+            this.list = newNode;
         }
+    }
+
+    size() {
+        let count = 0;
+        let node = this.list;
+        while (node) {
+            count++;
+            node = node.nextNode;
+        }
+        return count;
+    }
+
+    head() {
+        return this.list;
+    }
+
+    tail() {
+        let node = this.list;
+        while (node.nextNode) {
+            node = node.nextNode;
+        }
+        return node;
+    }
+
+    at(index) {
+        let node = this.list;
+        for (let i = 0; i <= index; i++) {
+            node = node.nextNode;
+        }
+        return node;
     }
 }
   
 const linkedList = new LinkedList();
 
 linkedList.append(1);
-linkedList.append(2);
+linkedList.append(9);
 linkedList.append(3);
-linkedList.prepend(5);
-linkedList.prepend(4);
+linkedList.append(4);
+linkedList.prepend(0);
 
 console.log(linkedList);
+console.log(linkedList.size());
+console.log(linkedList.head());
+console.log(linkedList.tail());
+console.log(linkedList.at(0));
 
